@@ -13,7 +13,7 @@ else:
 
 def explain_for_doctors(input_features, prediction_label, shap_values, top_features):
     if not model:
-        return "⚠️ Gemini API key is not configured properly."
+        return "Gemini API key is not configured properly."
 
     # Build top feature breakdown
     top_feature_details = "\n".join(
@@ -23,13 +23,13 @@ def explain_for_doctors(input_features, prediction_label, shap_values, top_featu
     prompt = f"""
 You are an expert medical AI assistant helping doctors understand ML predictions.
 
-🧠 Model Output:
+Model Output:
 The model predicted: **'{prediction_label.upper()}'**
 
-📊 Key Factors Behind This Prediction (Top SHAP Features):
+Key Factors Behind This Prediction (Top SHAP Features):
 {top_feature_details}
 
-✅ Your Task:
+Your Task:
 Explain in clear, doctor-friendly terms why this prediction was made.
 - Mention what features most strongly influenced the result.
 - Don't use technical ML jargon like "model weights", "SHAP plots", etc.
@@ -42,4 +42,4 @@ Avoid code, be concise, clear, and medically intuitive.
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
-        return f"⚠️ Gemini explanation failed: {str(e)}"
+        return f"Gemini explanation failed: {str(e)}"
