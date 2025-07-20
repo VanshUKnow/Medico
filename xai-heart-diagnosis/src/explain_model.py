@@ -3,18 +3,18 @@ import pickle
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load model
+#For loading model
 model = pickle.load(open('models/xgb_model.pkl', 'rb'))
 
-# Load data
+#for loading data
 df = pd.read_csv('data/heart_cleveland_upload.csv')
 X = df.drop('condition', axis=1)
 
-# SHAP Explainer
+#SHAP explainer
 explainer = shap.Explainer(model)
 shap_values = explainer(X)
 
-# Plot beeswarm (global explanation)
+#Plot beeswarm (global explanation)
 plt.figure()
 shap.plots.beeswarm(shap_values, show=False)
 plt.tight_layout()
