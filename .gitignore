@@ -1,0 +1,38 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Environment files
+.env
+.venv/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# System files (macOS & Windows)
+.DS_Store
+Thumbs.db
+
+# VSCode settings (optional)
+.vscode/
+
+# Log files
+*.log
+
+# Model training artifacts (optional — REMOVE if needed for app)
+# ! If you WANT to push models/xgb_model.pkl, DO NOT ignore it
+# Uncomment the line below ONLY if you don’t want models tracked
+# models/
+
+# Streamlit config
+.streamlit/config.toml
+
+# Ignore everything in models/ except the actual .pkl file
+models/*
+!models/xgb_model.pkl
+
+# Ignore SHAP plots or output files (optional)
+*.png
