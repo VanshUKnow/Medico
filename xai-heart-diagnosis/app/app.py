@@ -110,7 +110,7 @@ if st.button("Predict"):
 
     st.subheader("Prediction")
     if prediction == 1:
-        st.error(f"❤️ {result_label}")
+        st.error(f"{result_label}")
     else:
         st.success(f"{result_label}")
     st.info(f"Confidence Score: {prediction_proba:.2%}")
@@ -149,7 +149,7 @@ if st.button("Predict"):
                 file_name="gemini_explanation.txt"
             )
         except Exception as e:
-            st.error(f"⚠️ Gemini explanation failed: {e}")
+            st.error(f"Gemini explanation failed: {e}")
 
 # Sidebar history
 st.sidebar.header("History & Export")
