@@ -9,27 +9,27 @@ import sys
 import pickle
 import google.generativeai as genai
 
-# Load Gemini function
+#For loading gemini function
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.gemini_explainer import explain_for_doctors
 
-# Environment
+#Environment (loading .env file where our API key is saved)
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Gemini model
+#Gemini model
 model_gemini = None
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
     model_gemini = genai.GenerativeModel("gemini-1.5-flash")
 
-# Load model
+#For loading model
 with open("models/xgb_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 explainer = shap.Explainer(model)
 
-# Styling
+#Styling
 st.set_page_config(page_title="Heart Disease Diagnosis", layout="wide")
 
 st.markdown("""
@@ -96,7 +96,7 @@ input_df = pd.DataFrame([input_data])
 st.subheader("Input Features")
 st.dataframe(input_df.style.highlight_max(axis=1), use_container_width=True)
 
-# Predict
+#Predict
 if st.button("Predict"):
     prediction = model.predict(input_df)[0]
     prediction_proba = model.predict_proba(input_df)[0][1]
@@ -129,7 +129,7 @@ if st.button("Predict"):
     ax.set_xlabel("Impact")
     st.pyplot(fig)
 
-    # Gemini Explanation
+    #Gemini explanation
     if model_gemini:
         st.subheader("Gemini Explanation for Doctors")
         top_features = shap_df.tail(5)['feature'].tolist()
@@ -151,7 +151,7 @@ if st.button("Predict"):
         except Exception as e:
             st.error(f"Gemini explanation failed: {e}")
 
-# Sidebar history
+#Sidebar history (until the page is refreshed)
 st.sidebar.header("History & Export")
 if st.sidebar.checkbox("Show Prediction History"):
     for i, item in enumerate(st.session_state["history"][::-1], 1):
