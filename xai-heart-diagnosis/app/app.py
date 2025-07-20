@@ -71,10 +71,10 @@ st.sidebar.header("Enter Patient Data")
 if "history" not in st.session_state:
     st.session_state["history"] = []
 
-age = st.sidebar.slider("Age", 29, 77, 50)
+age = st.sidebar.slider("Age", 10, 100, 50)
 sex = st.sidebar.selectbox("Sex", [0, 1], format_func=lambda x: "Female" if x == 0 else "Male")
 cp = st.sidebar.slider("Chest Pain Type (0–3)", 0, 3, 0)
-trestbps = st.sidebar.slider("Resting BP", 90, 200, 120)
+trestbps = st.sidebar.slider("Resting BP", 60, 200, 120)
 chol = st.sidebar.slider("Cholesterol", 100, 600, 240)
 fbs = st.sidebar.selectbox("Fasting Sugar >120", [0, 1])
 restecg = st.sidebar.slider("Resting ECG", 0, 2, 1)
